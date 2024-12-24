@@ -1,4 +1,4 @@
-package hhdplus.hhplus_tdd2.domain;
+package hhdplus.hhplus_tdd2.domain.reserve;
 
 import jdk.jfr.Enabled;
 

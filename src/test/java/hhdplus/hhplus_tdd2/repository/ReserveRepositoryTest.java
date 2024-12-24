@@ -1,12 +1,11 @@
 package hhdplus.hhplus_tdd2.repository;
 
-import hhdplus.hhplus_tdd2.domain.Reserve;
+import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReserveRepositoryTest {
 

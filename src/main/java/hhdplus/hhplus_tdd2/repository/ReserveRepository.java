@@ -1,6 +1,6 @@
 package hhdplus.hhplus_tdd2.repository;
 
-import hhdplus.hhplus_tdd2.domain.Reserve;
+import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

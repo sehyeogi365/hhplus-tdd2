@@ -1,4 +1,4 @@
-package hhdplus.hhplus_tdd2.domain;
+package hhdplus.hhplus_tdd2.domain.lecture;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

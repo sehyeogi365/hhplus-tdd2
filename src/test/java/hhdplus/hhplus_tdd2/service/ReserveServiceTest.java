@@ -1,15 +1,10 @@
 package hhdplus.hhplus_tdd2.service;
 
-import hhdplus.hhplus_tdd2.domain.Reserve;
 import hhdplus.hhplus_tdd2.repository.ReserveRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ReserveServiceTest {
 

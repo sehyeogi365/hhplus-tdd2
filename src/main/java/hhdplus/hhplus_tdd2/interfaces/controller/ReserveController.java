@@ -1,7 +1,6 @@
-package hhdplus.hhplus_tdd2.controller;
+package hhdplus.hhplus_tdd2.interfaces.controller;
 
-import ch.qos.logback.core.model.Model;
-import hhdplus.hhplus_tdd2.domain.Reserve;
+import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
 import hhdplus.hhplus_tdd2.service.ReserveService;
 import org.springframework.web.bind.annotation.*;
 

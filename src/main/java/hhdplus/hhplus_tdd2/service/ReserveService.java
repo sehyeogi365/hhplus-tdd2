@@ -1,6 +1,6 @@
 package hhdplus.hhplus_tdd2.service;
 
-import hhdplus.hhplus_tdd2.domain.Reserve;
+import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
 import hhdplus.hhplus_tdd2.repository.ReserveRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
