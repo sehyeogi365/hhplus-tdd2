@@ -1,7 +1,9 @@
 package hhdplus.hhplus_tdd2.interfaces.controller;
 
 import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
-import hhdplus.hhplus_tdd2.service.ReserveService;
+import hhdplus.hhplus_tdd2.domain.reserve.ReserveCommand;
+import hhdplus.hhplus_tdd2.domain.reserve.ReserveInfo;
+import hhdplus.hhplus_tdd2.domain.reserve.ReserveService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,51 +11,47 @@ import java.util.List;
 @RestController
 public class ReserveController {
 
-    private ReserveService reserveService;
+    private final ReserveService reserveService;
 
     public ReserveController(ReserveService reserveService) {
         this.reserveService = reserveService;
     }
 
+
+
+    //예약기능 최대 30명까지, 예약인원 중복 안되게
+    @PostMapping("{userId}/reserve/insert")
+    public ReserveRequest reserve(ReserveResponse reserveResponse, @PathVariable int userId){
+
+        return reserveService.insertReservation(reserveResponse);
+    }
+
     //예약내역 조회
     @GetMapping("{userId}/reserve/history")
-    public List<Reserve> history(@PathVariable int userId){
+    public List<ReserveInfo> history(@PathVariable int userId){
 
         return reserveService.findReservation(userId);
     }
 
-    //에약기능 최대 30명까지, 예약인원 중복 안되게
-    @PostMapping("{userId}/reserve/insert")
-    public Reserve reserve(Reserve reserve, @PathVariable int userId){
-
-        Reserve insert = reserveService.insertReservation(reserve);
-
-        reserve.setUserId(userId);
-
-        return reserve;
-    }
-
     //예약수정
     @PostMapping("{userId}/reserve/update")
-    public Reserve update(Reserve reserve, @PathVariable int userId){
+    public ReserveCommand update(@PathVariable int userId){
 
-        Reserve update = reserveService.modifyReservation(reserve);
+        ReserveCommand update = reserveService.modifyReservation(userId);
 
-        reserve.setUserId(userId);
+        update.setUserId(userId);
 
         return update;
     }
 
     //예약취소
     @GetMapping("/reserve/delete")
-    public String delete(Reserve reserve){
+    public String delete(int id){
 
-       int count =  reserveService.deleteReservation(reserve);
+       reserveService.deleteReservation(id);
 
-       if(count > 0){
-           return "삭제성공";
-       }
-        return "삭제 실패";
+       return "취소성공";
+
     }
 
 

@@ -1,15 +1,9 @@
-package hhdplus.hhplus_tdd2.domain.reserve;
-
-import jakarta.persistence.*;
-import jdk.jfr.Enabled;
+package hhdplus.hhplus_tdd2.interfaces.controller;
 
 import java.util.Date;
 
-@Entity
-@Table(name="reservation")
-public class Reserve {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReserveResponse {
+
     private int id;
     private int userId;
     private int lectureId;
@@ -55,5 +49,4 @@ public class Reserve {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 }

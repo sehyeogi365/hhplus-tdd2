@@ -1,21 +1,15 @@
 package hhdplus.hhplus_tdd2.domain.lecture;
 
-import jakarta.persistence.*;
-
 import java.util.Date;
 
-@Entity
-@Table(name="lecture")
-public class Lecture {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class LectureInfo {//강의 카드 한장에 들어가는 정보
+
     private int id;
+
     private String name;
 
     private String instructor;
 
-    private Date createdAt;
-    private Date updatedAt;
     private Date enrollment_start_date;
     private Date enrollment_end_date;
     private Date course_start_date;
@@ -43,22 +37,6 @@ public class Lecture {
 
     public void setInstructor(String instructor) {
         this.instructor = instructor;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public Date getEnrollment_start_date() {
@@ -90,18 +68,6 @@ public class Lecture {
     }
 
     public void setMax_enrollment(int max_enrollment) {
-        this.max_enrollment = max_enrollment;
-    }
-
-    public Lecture(int id, String name, String instructor, Date createdAt, Date updatedAt, Date enrollment_start_date, Date enrollment_end_date, Date course_start_date, int max_enrollment) {
-        this.id = id;
-        this.name = name;
-        this.instructor = instructor;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.enrollment_start_date = enrollment_start_date;
-        this.enrollment_end_date = enrollment_end_date;
-        this.course_start_date = course_start_date;
         this.max_enrollment = max_enrollment;
     }
 }
