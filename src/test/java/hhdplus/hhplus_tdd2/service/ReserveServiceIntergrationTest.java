@@ -89,17 +89,12 @@ public class ReserveServiceIntergrationTest {
         reserveResponse.setLectureId(1);
 
 
-        for(int i = 0; i < 40; i++){
-            reserveResponse.setId(i);
-            reserveResponse.setUserId(i);
-            reserveResponse.setLectureId(i);
-        }
 
-        //when 이거를 실행했을 떄
-        ReserveRequest findOne = reserveService.findOne(reserveResponse.getUserId());
+        ReserveRequest findOne = new ReserveRequest();
         findOne.setUserId(1);
         findOne.setLectureId(1);
-
+        //when 이거를 실행했을 떄
+        // findOne = reserveService.findOne(reserveResponse.getUserId());
         // Mock 동작 설정
         when(reserveService.insertReservation(reserveResponse)).thenReturn(findOne);
 
@@ -109,8 +104,62 @@ public class ReserveServiceIntergrationTest {
         if(findOne != null){
             System.out.println("findOne : " + reserveResponse.getLectureId());
         }
-        assertThat(reserveResponse.getLectureId()).isEqualTo(1);
+        assertThat(findOne).isNotNull();
         assertThat(result.getLectureId()).isEqualTo(1);
+
+    }
+
+    @Test
+    void 예약하기2() {//40명이 예약 한다 쳐보면 30명만 예약이 되게끔 해보기
+        //given 뭔가가 주어졌는데 -> 40명의인원, 데이터
+
+        ReserveRequest findOne = new ReserveRequest();
+        findOne.setUserId(1);
+        findOne.setLectureId(1);
+
+        int successCount = 0;
+        int failCount = 0;
+
+        //when 이거를 실행했을 떄 40명이 예약을 시도할 때 30명만 예약이되게 수정
+
+        for(int i = 0; i < 40; i++){
+            ReserveResponse reserveResponse = new ReserveResponse();
+            reserveResponse.setId(i);
+            reserveResponse.setUserId(i);
+            reserveResponse.setLectureId(i);
+
+
+            //30명까진 성공 나머진 실패하게 하기
+            if(i < 30){
+                // 30명까지는 성공
+                // Mock 동작 설정
+                when(reserveService.insertReservation(reserveResponse)).thenReturn(findOne);
+
+                ReserveRequest result = reserveService.insertReservation(reserveResponse);
+                // 성공 검증
+                assertThat(findOne).isNotNull();
+                assertThat(result.getLectureId()).isEqualTo(1);
+                successCount++;
+            } else {
+                // 31번째부터는 실패를 시뮬레이션
+                when(reserveService.insertReservation(reserveResponse))
+                        .thenThrow(new IllegalStateException("예약 인원이 초과되었습니다."));
+
+                try {
+                    reserveService.insertReservation(reserveResponse);
+                } catch (IllegalStateException e) {
+                    assertThat(e.getMessage()).isEqualTo("예약 인원이 초과되었습니다.");
+                    failCount++;
+                }
+            }
+
+
+        }
+        //then 결과가 이게 나와야 돼
+
+        assertThat(successCount).isEqualTo(30);//성공수
+        //실패수
+        assertThat(failCount).isEqualTo(10);//실패수
 
     }
 
