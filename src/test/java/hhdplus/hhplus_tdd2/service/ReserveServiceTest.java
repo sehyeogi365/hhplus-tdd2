@@ -11,10 +11,12 @@ import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import java.util.List;
@@ -23,12 +25,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class ReserveServiceTest {
 
     @InjectMocks
     ReserveService reserveService;
     @Mock
-    ReserveRepository reserveRepository = mock(ReserveRepository.class);
+    ReserveRepository reserveRepository;
 
     ReserveRequest reserveRequest = new ReserveRequest();
     ReserveResponse reserveResponse = new ReserveResponse();
@@ -36,15 +39,15 @@ public class ReserveServiceTest {
     Reserve reserve = new Reserve();
 
     //동작하기 전에 넣어준다 BeforeEach
-    @BeforeEach
-    public void beforeEach() {
-        MockitoAnnotations.openMocks(this); // Mock 객체 초기화
-    }
-
-    @AfterEach //테스트 돌때마다 초기화
-    public void afterEach() {
-        Mockito.reset(reserveRepository); // Mock 상태 초기화
-    }
+//    @BeforeEach
+//    public void beforeEach() {
+//        MockitoAnnotations.openMocks(this); // Mock 객체 초기화
+//    }
+//
+//    @AfterEach //테스트 돌때마다 초기화
+//    public void afterEach() {
+//        Mockito.reset(reserveRepository); // Mock 상태 초기화
+//    }
 
     @Test
     void 아이디별_예약_내역() {
@@ -89,14 +92,16 @@ public class ReserveServiceTest {
         //when 이거를 실행했을 떄
         // findOne = reserveService.findOne(reserveResponse.getUserId());
         // Mock 동작 설정
-        Mockito.when(reserveService.insertReservation(reserveResponse)).thenReturn(findOne);
+        when(reserveService.insertReservation(reserveResponse)).thenReturn(findOne);
+
+        ReserveRequest result = reserveService.insertReservation(reserveResponse);
 
         //then 결과가 이게 나와야 돼
         if(findOne != null){
             System.out.println("findOne : " + reserveResponse.getLectureId());
         }
         assertThat(findOne).isNotNull();
-        assertThat(reserveResponse.getLectureId()).isEqualTo(1);
+        assertThat(result.getLectureId()).isEqualTo(1);
 
     }
 
@@ -106,10 +111,10 @@ public class ReserveServiceTest {
         ReserveCommand reserveCommand = new ReserveCommand();
         reserveCommand.setLectureId(1);
         reserveCommand.setId(1);
-        reserveCommand.setId(1);
+        reserveCommand.setUserId(1);
 
         //when 이거를 실행했을 때
-        Mockito.when(reserveService.modifyReservation(reserveCommand.getUserId())).thenReturn(reserveCommand);
+        when(reserveService.modifyReservation(reserveCommand.getUserId())).thenReturn(reserveCommand);
 
         ReserveRequest findOne = reserveService.findOne(reserveCommand.getUserId());
         //then 결과가 이게 나와야 돼

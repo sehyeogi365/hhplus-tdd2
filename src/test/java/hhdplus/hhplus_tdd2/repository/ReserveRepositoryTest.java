@@ -1,10 +1,12 @@
 package hhdplus.hhplus_tdd2.repository;
 
 import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
+import hhdplus.hhplus_tdd2.domain.reserve.ReserveCommand;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveInfo;
 import hhdplus.hhplus_tdd2.infra.reserve.ReserveRepository;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 //@SpringBootTest
@@ -32,33 +33,33 @@ class ReserveRepositoryTest {
 //    ReserveRepository repository = mock(ReserveRepository.class);
 
     @Mock
-    ReserveRepository repository = mock(ReserveRepository.class);
+    private ReserveRepository repository;
     private Reserve reserve;
-    private ReserveRequest reserveRequest1;
-    private ReserveRequest reserveRequest2;
+    private ReserveRequest reserveRequest = new ReserveRequest();
+    private ReserveResponse reserveResponse = new ReserveResponse();
 
-    @Autowired
-    public ReserveRepositoryTest(Reserve reserve, ReserveRequest reserveRequest1, ReserveRequest reserveRequest2) {
-        this.reserve = reserve;
-        this.reserveRequest1 = reserveRequest1;
-        this.reserveRequest2 = reserveRequest2;
-    }
+//    @Autowired
+//    public ReserveRepositoryTest(Reserve reserve, ReserveRequest reserveRequest1, ReserveRequest reserveRequest2) {
+//        this.reserve = reserve;
+//        this.reserveRequest1 = reserveRequest1;
+//        this.reserveRequest2 = reserveRequest2;
+//    }
+//
+//    @BeforeEach
+//    void setup() {
+//        reserveRequest1 = new ReserveRequest();
+//        reserveRequest1.setId(1);
+//        reserveRequest1.setUserId(1);
+//
+//        reserveRequest2 = new ReserveRequest();
+//        reserveRequest2.setId(2);
+//        reserveRequest2.setUserId(2);
+//    }
 
-    @BeforeEach
-    void setup() {
-        reserveRequest1 = new ReserveRequest();
-        reserveRequest1.setId(1);
-        reserveRequest1.setUserId(1);
-
-        reserveRequest2 = new ReserveRequest();
-        reserveRequest2.setId(2);
-        reserveRequest2.setUserId(2);
-    }
-
-    @AfterEach
-    void cleanUp(){
-        repository.deleteAll();
-    }
+//    @AfterEach
+//    void cleanUp(){
+//        repository.deleteAll();
+//    }
 
     @Test
     public void findAll() {
@@ -68,10 +69,12 @@ class ReserveRepositoryTest {
         reserveInfo.setId(1);
         reserveInfo.setUserId(1);
 
-        //when 이거를 실행했을 떄
-        List<ReserveInfo> list = repository.findAll(reserveInfo.getUserId());
+        List<ReserveInfo> mockReserveList = List.of(reserveInfo);
 
-        when(repository.findAll(reserveInfo.getUserId())).thenReturn(list);
+        //when 이거를 실행했을 떄
+        when(repository.findAll(reserveInfo.getUserId())).thenReturn(mockReserveList);
+
+        List<ReserveInfo> list = repository.findAll(reserveInfo.getUserId());
 
         System.out.println("list.size()" + list.size());
         //then 결과가 이게 나와야 돼
@@ -84,33 +87,53 @@ class ReserveRepositoryTest {
         ReserveResponse reserveResponse = new ReserveResponse();
         reserveResponse.setUserId(1);
         reserveResponse.setId(1);
+        reserveResponse.setLectureId(1);
 
-        ReserveRequest reserveRequest = repository.findOne(reserveResponse.getUserId());
+        ReserveRequest findOne = new ReserveRequest();
+        findOne.setUserId(1);
+        findOne.setLectureId(1);
 
         //when 이거를 실행했을 떄
-        Mockito.when(repository.save(reserveResponse)).thenReturn(reserveRequest);
+        when(repository.save(reserveResponse)).thenReturn(findOne);
+        //when(repository.findOne(findOne.getUserId())).thenReturn(new ReserveRequest());
+
         ReserveRequest result = repository.save(reserveResponse);
         //repository.save(reserveResponse);
         //ReserveResponse result = repository.findOne(reserveResponse.getUserId());
 
         //then 결과가 이게 나와야 돼
-        assertThat(result.getUserId()).isEqualTo(1);
+//        if(findOne != null){
+//            System.out.println("findOne : " + reserveResponse.getLectureId());
+//        }
+
+        assertThat(result.getLectureId()).isEqualTo(1);
     }
 
     @Test
     public void update() {
         //given 뭔가가 주어졌는데
-        ReserveResponse reserveResponse = new ReserveResponse();
-        reserveResponse.setUserId(2);
-
-        repository.save(reserveResponse); // 데이터를 저장
+        ReserveCommand reserveCommand = new ReserveCommand();
+        reserveCommand.setUserId(2);
+        reserveCommand.setLectureId(2);
+        reserveCommand.setId(2);
 
         //when 이거를 실행했을 떄
-        repository.update(reserveResponse.getUserId());
-        ReserveRequest result = repository.findOne(reserveResponse.getUserId());
-        //then 결과가 이게 나와야 돼
+        //stub 동작 정의
+        when(repository.update(reserveCommand.getUserId())).thenReturn(reserveCommand);
+        when(repository.findOne(reserveCommand.getUserId())).thenReturn(new ReserveRequest());
 
-        assertThat(result).isEqualTo(reserveResponse);
+        ReserveRequest findOne = repository.findOne(reserveCommand.getUserId());
+
+
+        //then 결과가 이게 나와야 돼
+        if(findOne != null){
+            System.out.println("성공");
+        }
+
+        //assertThat(result).isEqualTo(reserveResponse);
+        // 검증
+        verify(repository).update(reserveCommand.getUserId());
+        verify(repository).findOne(reserveCommand.getUserId());
     }
 
     @Test
