@@ -116,12 +116,9 @@ public class ReserveServiceTest {
         //when 이거를 실행했을 때
         when(reserveService.modifyReservation(reserveCommand.getUserId())).thenReturn(reserveCommand);
 
-        ReserveRequest findOne = reserveService.findOne(reserveCommand.getUserId());
-        //then 결과가 이게 나와야 돼
-        //assertThat(findOne).isNotNull();
-        if(findOne != null){
-            System.out.println("findOne : " + reserveResponse.getLectureId());
-        }
+        ReserveCommand findOne = reserveService.modifyReservation(reserveCommand.getUserId());
+
+        assertThat(findOne).isNotNull();
     }
 
     @Test
@@ -131,18 +128,26 @@ public class ReserveServiceTest {
         reserveResponse.setId(1);
         reserveResponse.setUserId(1);
 
+//        ReserveRequest result = reserveService.findOne(reserveResponse.getUserId());
+//        result.setId(1);
+//        result.setUserId(1);
+
+        // Mockito 스텁 설정
+        //when(reserveService.findOne(reserveResponse.getUserId())).thenReturn(result);
+
+        // 예약 삭제 실행
         reserveService.deleteReservation(reserveResponse.getId());
 
         //when 이거를 실행했을 때
-        ReserveRequest result = reserveService.findOne(reserveResponse.getUserId());
         List<ReserveInfo> list = reserveService.findReservation(reserveResponse.getUserId());
 
-        Mockito.when(reserveService.findOne(reserveResponse.getUserId())).thenReturn(result);
+        //when(reserveService.findOne(reserveResponse.getUserId())).thenReturn(result);
         //then 결과가 이게 나와야 돼
 
-        if(list == null){
+        if(list.isEmpty()){
             System.out.println("삭제 완료");
         }
-
+        assertThat(list.size()).isEqualTo(0);
     }
+
 }
