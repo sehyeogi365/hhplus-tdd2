@@ -1,5 +1,6 @@
 package hhdplus.hhplus_tdd2.interfaces.controller;
 
+import hhdplus.hhplus_tdd2.domain.lecture.Lecture;
 import hhdplus.hhplus_tdd2.domain.lecture.LectureInfo;
 import hhdplus.hhplus_tdd2.domain.lecture.LectureService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,9 @@ public class LectureController {
 
     //강의 조회
     @GetMapping("/lecture/select")
-    public List<LectureInfo> lectureList(){
+    public List<Lecture> lectureList(){
 
-        List<LectureInfo> list = lectureService.lectureList();
+        List<Lecture> list = lectureService.lectureList();
 
         return list;
     }

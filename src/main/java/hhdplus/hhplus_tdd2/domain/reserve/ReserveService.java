@@ -22,11 +22,12 @@ public class ReserveService {
 
 
     //에약기능 최대 30명까지, 예약인원 중복 안되게
+    @Transactional
     public ReserveRequest insertReservation(ReserveResponse reserveResponse){
 
-        int count = reserveRepository.count(reserveResponse.getLectureId());//예약인워
+        int count = reserveRepository.count(reserveResponse.getLectureId());//예약인원
 
-        boolean isDuplciate = reserveRepository.isDuplicate(reserveResponse.getUserId());//중복조회
+        boolean isDuplciate = reserveRepository.isDuplicate(reserveResponse.getUserId(), reserveResponse.getLectureId());//중복조회
 
         if(count > 30){
             throw new IllegalStateException("예약 인원이 초과되었습니다. 최대 30명까지 예약 가능합니다.");
@@ -52,12 +53,14 @@ public class ReserveService {
     }
 
     //예약수정
+    @Transactional
     public ReserveCommand modifyReservation(int userId){
 
         return reserveRepository.update(userId);
     }
 
     //예약취소
+    @Transactional
     public void deleteReservation(int id){
 
         reserveRepository.findById(id).ifPresent(reserve -> reserveRepository.delete(reserve));

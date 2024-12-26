@@ -12,7 +12,7 @@ import java.util.List;
 @Transactional
 public class LectureService {
 
-    LectureRepository lectureRepository;
+    private LectureRepository lectureRepository;
 
     public LectureService(LectureRepository lectureRepository) {
         this.lectureRepository = lectureRepository;
@@ -22,7 +22,7 @@ public class LectureService {
 
         return lectureRepository.save(lectureResponse);
     }
-    public List<LectureInfo> lectureList(){
+    public List<Lecture> lectureList(){
 
         return lectureRepository.findAll();
     }
