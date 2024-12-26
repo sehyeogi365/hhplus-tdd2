@@ -7,4 +7,4 @@ lecture 테이블 : id(pk), 이름(name), 강사명(instructor), 생성일자(cr
             강의 시작일(course_start_date),수강신청 가능인원(max_enrollment) 
 reservation 테이블 : id(pk), 사용자아이디(fk1, userId), 강의아이디(fk2, lectureId)
 
-우선 reservation 테이블에는 예약한 사용자의 정보와 강의의 정보를 받아와야 했습니다. 유저테이블의 id인 userId를 fk2, 강의테이블의 id 인 lectureId를 fk2로 받았습니다.
+우선 reservation 테이블에는 예약한 사용자의 정보와 강의의 정보를 받아와야 했습니다. 유저테이블의 id인 userId를 fk1, 강의테이블의 id 인 lectureId를 fk2로 받았습니다.
