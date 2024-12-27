@@ -57,22 +57,21 @@ public class ReserveServiceIntergrationTest {
         //given 뭔가가 주어졌는데
         int userId = 1;
 
-        ReserveInfo mockReserveInfo = new ReserveInfo();
-        mockReserveInfo.setId(1);
-        mockReserveInfo.setUserId(userId);
-        mockReserveInfo.setName("테스트 예약 정보");
+        ReserveInfo reserveInfo = new ReserveInfo();
+        reserveInfo.setId(1);
+        reserveInfo.setUserId(userId);
+        reserveInfo.setName("테스트 예약 정보");
 
-        List<ReserveInfo> mockReserveList = List.of(mockReserveInfo);
+        List<ReserveInfo> reserveList = List.of(reserveInfo);
 
-        // Mock 동작 설정
-        when(reserveService.findReservation(1)).thenReturn(mockReserveList);
+        reserveService.findReservation(1);
 
         //when 이거를 실행했을 떄
         List<ReserveInfo> result = reserveService.findReservation(userId);
 
         //then 결과가 이게 나와야 돼
         if(result != null){
-            System.out.println("이름 : " + mockReserveInfo.getName());
+            System.out.println("이름 : " + reserveInfo.getName());
         }
 
         assertThat(result).isNotNull();
@@ -88,15 +87,12 @@ public class ReserveServiceIntergrationTest {
         reserveResponse.setUserId(1);
         reserveResponse.setLectureId(1);
 
-
-
         ReserveRequest findOne = new ReserveRequest();
         findOne.setUserId(1);
         findOne.setLectureId(1);
         //when 이거를 실행했을 떄
-        // findOne = reserveService.findOne(reserveResponse.getUserId());
-        // Mock 동작 설정
-        when(reserveService.insertReservation(reserveResponse)).thenReturn(findOne);
+        findOne = reserveService.findOne(reserveResponse.getUserId());
+        reserveService.insertReservation(reserveResponse);
 
         ReserveRequest result = reserveService.insertReservation(reserveResponse);
 
@@ -132,8 +128,6 @@ public class ReserveServiceIntergrationTest {
             //30명까진 성공 나머진 실패하게 하기
             if(i < 30){
                 // 30명까지는 성공
-                // Mock 동작 설정
-                when(reserveService.insertReservation(reserveResponse)).thenReturn(findOne);
 
                 ReserveRequest result = reserveService.insertReservation(reserveResponse);
                 // 성공 검증
@@ -142,9 +136,6 @@ public class ReserveServiceIntergrationTest {
                 successCount++;
             } else {
                 // 31번째부터는 실패를 시뮬레이션
-                when(reserveService.insertReservation(reserveResponse))
-                        .thenThrow(new IllegalStateException("예약 인원이 초과되었습니다."));
-
                 try {
                     reserveService.insertReservation(reserveResponse);
                 } catch (IllegalStateException e) {
@@ -152,7 +143,6 @@ public class ReserveServiceIntergrationTest {
                     failCount++;
                 }
             }
-
 
         }
         //then 결과가 이게 나와야 돼
@@ -172,7 +162,7 @@ public class ReserveServiceIntergrationTest {
         reserveCommand.setId(1);
 
         //when 이거를 실행했을 때
-        when(reserveService.modifyReservation(reserveCommand.getUserId())).thenReturn(reserveCommand);
+        reserveService.modifyReservation(reserveCommand.getUserId());
 
         ReserveRequest findOne = reserveService.findOne(reserveCommand.getUserId());
         //then 결과가 이게 나와야 돼
