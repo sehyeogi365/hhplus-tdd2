@@ -78,7 +78,7 @@ public class ReserveServiceIntergrationTest {
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getUserId()).isEqualTo(userId);
     }
-
+    //성공 실패 케이스로 나눠서 하기, 변수가 아닌 디비 컬럼에 데이터가 30개 모였는지 체크하게 고치기, sysout 없애기
     @Test
     void 예약하기() {//40명이 예약 한다 쳐보면 30명만 예약이 되게끔 해보기
         //given 뭔가가 주어졌는데
