@@ -22,14 +22,12 @@ public class ReserveController {
     //예약기능 최대 30명까지, 예약인원 중복 안되게
     @PostMapping("{userId}/reserve/insert")
     public ReserveRequest reserve(ReserveResponse reserveResponse, @PathVariable int userId){
-
         return reserveService.insertReservation(reserveResponse);
     }
 
     //예약내역 조회
     @GetMapping("{userId}/reserve/history")
     public List<ReserveInfo> history(@PathVariable int userId){
-
         return reserveService.findReservation(userId);
     }
 
@@ -51,8 +49,6 @@ public class ReserveController {
        reserveService.deleteReservation(id);
 
        return "취소성공";
-
     }
-
 
 }

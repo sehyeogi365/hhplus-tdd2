@@ -1,12 +1,11 @@
 package hhdplus.hhplus_tdd2.interfaces.controller;
 
 import hhdplus.hhplus_tdd2.domain.lecture.Lecture;
-import hhdplus.hhplus_tdd2.domain.lecture.LectureInfo;
 import hhdplus.hhplus_tdd2.domain.lecture.LectureService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class LectureController {
@@ -21,7 +20,6 @@ public class LectureController {
     //강의 생성
     @PostMapping("/lecture/insert")
     public LectureRequest insertLecture(LectureResponse lectureResponse){
-
         return lectureService.insertLecture(lectureResponse);
     }
 

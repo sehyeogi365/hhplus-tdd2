@@ -1,7 +1,6 @@
 package hhdplus.hhplus_tdd2.domain.reserve;
 
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
 
 import java.util.Date;
 

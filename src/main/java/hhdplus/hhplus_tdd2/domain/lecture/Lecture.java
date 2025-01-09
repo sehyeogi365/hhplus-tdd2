@@ -11,9 +11,7 @@ public class Lecture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
     private String instructor;
-
     private Date createdAt;
     private Date updatedAt;
     private Date enrollment_start_date;
