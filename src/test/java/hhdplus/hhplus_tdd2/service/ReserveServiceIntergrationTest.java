@@ -5,7 +5,7 @@ import hhdplus.hhplus_tdd2.domain.reserve.ReserveCommand;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveInfo;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveService;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveRepository;
-import hhdplus.hhplus_tdd2.interfaces.controller.ReserveRequest;
+import hhdplus.hhplus_tdd2.interfaces.dto.ReserveRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
 
 import org.junit.jupiter.api.Test;
@@ -23,8 +23,8 @@ public class ReserveServiceIntergrationTest {
     @Autowired
     ReserveRepository reserveRepository;
 
-    ReserveRequest reserveRequest = new ReserveRequest();
-    ReserveResponse reserveResponse = new ReserveResponse();
+//    ReserveRequest reserveRequest = new ReserveRequest();
+//    ReserveResponse reserveResponse = new ReserveResponse();
     Reserve reserve = new Reserve();
 
     //동작하기 전에 넣어준다 BeforeEach
@@ -44,12 +44,14 @@ public class ReserveServiceIntergrationTest {
         //given 뭔가가 주어졌는데
         int userId = 1;
 
-        ReserveInfo reserveInfo = new ReserveInfo();
-        reserveInfo.setId(1);
-        reserveInfo.setUserId(userId);
-        reserveInfo.setName("테스트 예약 정보");
+        ReserveInfo reserveInfo = ReserveInfo.builder()
+                                            .id(1)
+                                            .userId(userId)
+                                            .name("테스트 예약 정보")
+                                            .build();
 
-        List<ReserveInfo> reserveList = List.of(reserveInfo);
+
+        //List<ReserveInfo> reserveList = List.of(reserveInfo);
 
         reserveService.findReservation(1);
 
@@ -69,14 +71,14 @@ public class ReserveServiceIntergrationTest {
     @Test
     void 예약하기() {//40명이 예약 한다 쳐보면 30명만 예약이 되게끔 해보기
         //given 뭔가가 주어졌는데
-        ReserveResponse reserveResponse = new ReserveResponse();
-        reserveResponse.setId(1);
-        reserveResponse.setUserId(1);
-        reserveResponse.setLectureId(1);
+        ReserveResponse reserveResponse = ReserveResponse.builder()
+                                                        .id(1)
+                                                        .userId(1)
+                                                        .lectureId(1)
+                                                        .build();
 
-        ReserveRequest findOne = new ReserveRequest();
-        findOne.setUserId(1);
-        findOne.setLectureId(1);
+        ReserveRequest findOne = ReserveRequest.builder().userId(1).lectureId(1).build();
+
         //when 이거를 실행했을 떄
         findOne = reserveService.findOne(reserveResponse.getUserId());
         reserveService.insertReservation(reserveResponse);
@@ -96,20 +98,21 @@ public class ReserveServiceIntergrationTest {
     void 예약하기2() {//40명이 예약 한다 쳐보면 30명만 예약이 되게끔 해보기
         //given 뭔가가 주어졌는데 -> 40명의인원, 데이터
 
-        ReserveRequest findOne = new ReserveRequest();
-        findOne.setUserId(1);
-        findOne.setLectureId(1);
-
+        ReserveRequest findOne = ReserveRequest.builder()
+                                                .userId(1)
+                                                .lectureId(1)
+                                                .build();
         int successCount = 0;
         int failCount = 0;
 
         //when 이거를 실행했을 떄 40명이 예약을 시도할 때 30명만 예약이되게 수정
 
         for(int i = 0; i < 40; i++){
-            ReserveResponse reserveResponse = new ReserveResponse();
-            reserveResponse.setId(i);
-            reserveResponse.setUserId(i);
-            reserveResponse.setLectureId(i);
+            ReserveResponse reserveResponse = ReserveResponse.builder()
+                                                                .id(i)
+                                                                .userId(i)
+                                                                .lectureId(i)
+                                                                .build();
 
 
             //30명까진 성공 나머진 실패하게 하기
@@ -143,10 +146,11 @@ public class ReserveServiceIntergrationTest {
     @Test
     void 예약수정() {
         //given 뭔가가 주어졌는데
-        ReserveCommand reserveCommand = new ReserveCommand();
-        reserveCommand.setLectureId(1);
-        reserveCommand.setId(1);
-        reserveCommand.setId(1);
+        ReserveCommand reserveCommand = ReserveCommand.builder()
+                                                        .lectureId(1)
+                                                        .userId(1)
+                                                        .build();
+
 
         //when 이거를 실행했을 때
         reserveService.modifyReservation(reserveCommand.getUserId());
@@ -155,16 +159,17 @@ public class ReserveServiceIntergrationTest {
         //then 결과가 이게 나와야 돼
         assertThat(findOne).isNotNull();
         if(findOne != null){
-            System.out.println("findOne : " + reserveResponse.getLectureId());
+            System.out.println("findOne : " + findOne.getLectureId());
         }
     }
 
     @Test
     void 예약삭제() {
         //given 뭔가가 주어졌는데
-        ReserveResponse reserveResponse = new ReserveResponse();
-        reserveResponse.setId(1);
-        reserveResponse.setUserId(1);
+        ReserveResponse reserveResponse = ReserveResponse.builder()
+                                                            .id(1)
+                                                            .userId(1)
+                                                            .build();
 
         reserveService.deleteReservation(reserveResponse.getId());
 
