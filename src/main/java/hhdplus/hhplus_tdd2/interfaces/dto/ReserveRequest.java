@@ -1,11 +1,11 @@
-package hhdplus.hhplus_tdd2.domain.reserve;
+package hhdplus.hhplus_tdd2.interfaces.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class ReserveCommand {
+public class ReserveRequest {
     private int id;
     private int userId;
     private int lectureId;

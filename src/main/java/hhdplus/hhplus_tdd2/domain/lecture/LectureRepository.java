@@ -1,8 +1,7 @@
 package hhdplus.hhplus_tdd2.domain.lecture;
 
-import hhdplus.hhplus_tdd2.domain.lecture.Lecture;
-import hhdplus.hhplus_tdd2.interfaces.controller.LectureRequest;
-import hhdplus.hhplus_tdd2.interfaces.controller.LectureResponse;
+import hhdplus.hhplus_tdd2.interfaces.dto.LectureRequest;
+import hhdplus.hhplus_tdd2.interfaces.dto.LectureResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,12 +1,9 @@
 package hhdplus.hhplus_tdd2.service;
 
-import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
-import hhdplus.hhplus_tdd2.domain.reserve.ReserveCommand;
-import hhdplus.hhplus_tdd2.domain.reserve.ReserveInfo;
-import hhdplus.hhplus_tdd2.domain.reserve.ReserveService;
-import hhdplus.hhplus_tdd2.domain.reserve.ReserveRepository;
-import hhdplus.hhplus_tdd2.interfaces.controller.ReserveRequest;
+import hhdplus.hhplus_tdd2.domain.reserve.*;
+
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
+import hhdplus.hhplus_tdd2.interfaces.dto.ReserveRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,11 +22,6 @@ public class ReserveServiceTest {
     @Mock
     ReserveRepository reserveRepository;
 
-    ReserveRequest reserveRequest = new ReserveRequest();
-    ReserveResponse reserveResponse = new ReserveResponse();
-
-    Reserve reserve = new Reserve();
-
     //동작하기 전에 넣어준다 BeforeEach
 //    @BeforeEach
 //    public void beforeEach() {
@@ -47,10 +39,10 @@ public class ReserveServiceTest {
         //given 뭔가가 주어졌는데
         int userId = 1;
 
-        ReserveInfo mockReserveInfo = new ReserveInfo();
-        mockReserveInfo.setId(1);
-        mockReserveInfo.setUserId(userId);
-        mockReserveInfo.setName("테스트 예약 정보");
+        ReserveInfo mockReserveInfo = ReserveInfo.builder()
+                                                .id(1)
+                                                .userId(userId)
+                                                .name("테스트 예약 정보").build();
 
         List<ReserveInfo> mockReserveList = List.of(mockReserveInfo);
 
@@ -73,14 +65,17 @@ public class ReserveServiceTest {
     @Test
     void 예약하기() {//40명이 예약 한다 쳐보면 30명만 예약이 되게끔 해보기
         //given 뭔가가 주어졌는데
-        ReserveResponse reserveResponse = new ReserveResponse();
-        reserveResponse.setId(1);
-        reserveResponse.setUserId(1);
-        reserveResponse.setLectureId(1);
+        ReserveResponse reserveResponse = ReserveResponse.builder()
+                                        .id(1)
+                                        .userId(1)
+                                        .lectureId(1)
+                                        .build();
 
-        ReserveRequest findOne = new ReserveRequest();
-        findOne.setUserId(1);
-        findOne.setLectureId(1);
+        ReserveRequest findOne =  ReserveRequest.builder()
+                                                .userId(1)
+                                                .lectureId(1)
+                                                .build();
+
         //when 이거를 실행했을 떄
         // findOne = reserveService.findOne(reserveResponse.getUserId());
         // Mock 동작 설정
@@ -100,9 +95,7 @@ public class ReserveServiceTest {
     void 예약하기2() {//40명이 예약 한다 쳐보면 30명만 예약이 되게끔 해보기
         //given 뭔가가 주어졌는데 -> 40명의인원, 데이터
 
-        ReserveRequest findOne = new ReserveRequest();
-        findOne.setUserId(1);
-        findOne.setLectureId(1);
+        ReserveRequest findOne =  ReserveRequest.builder().userId(1).lectureId(1).build();
 
         int successCount = 0;
         int failCount = 0;
@@ -110,10 +103,12 @@ public class ReserveServiceTest {
         //when 이거를 실행했을 떄 40명이 예약을 시도할 때 30명만 예약이되게 수정
 
         for(int i = 0; i < 40; i++){
-            ReserveResponse reserveResponse = new ReserveResponse();
-            reserveResponse.setId(i);
-            reserveResponse.setUserId(i);
-            reserveResponse.setLectureId(i);
+            ReserveResponse reserveResponse = ReserveResponse.builder()
+                                                            .id(i)
+                                                            .userId(i)
+                                                            .lectureId(i)
+                                                            .build();
+
 
 
             //30명까진 성공 나머진 실패하게 하기
@@ -143,7 +138,6 @@ public class ReserveServiceTest {
 
         }
         //then 결과가 이게 나와야 돼
-
         assertThat(successCount).isEqualTo(30);//성공수
         //실패수
         assertThat(failCount).isEqualTo(10);//실패수
@@ -152,10 +146,11 @@ public class ReserveServiceTest {
     @Test
     void 예약수정() {
         //given 뭔가가 주어졌는데
-        ReserveCommand reserveCommand = new ReserveCommand();
-        reserveCommand.setLectureId(1);
-        reserveCommand.setId(1);
-        reserveCommand.setUserId(1);
+        ReserveCommand reserveCommand = ReserveCommand.builder()
+                                                        .lectureId(1)
+                                                        .id(1)
+                                                        .userId(1)
+                                                        .build();
 
         //when 이거를 실행했을 때
         when(reserveService.modifyReservation(reserveCommand.getUserId())).thenReturn(reserveCommand);
@@ -168,9 +163,11 @@ public class ReserveServiceTest {
     @Test
     void 예약삭제() {
         //given 뭔가가 주어졌는데
-        ReserveResponse reserveResponse = new ReserveResponse();
-        reserveResponse.setId(1);
-        reserveResponse.setUserId(1);
+        ReserveResponse reserveResponse = ReserveResponse.builder()
+                                            .id(1)
+                                            .userId(1)
+                                            .build();
+
 
 //        ReserveRequest result = reserveService.findOne(reserveResponse.getUserId());
 //        result.setId(1);

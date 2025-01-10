@@ -1,23 +1,19 @@
 package hhdplus.hhplus_tdd2.interfaces.controller;
 
-import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveCommand;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveInfo;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveService;
+import hhdplus.hhplus_tdd2.interfaces.dto.ReserveRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+
+@RequiredArgsConstructor
 public class ReserveController {
 
     private final ReserveService reserveService;
-
-    public ReserveController(ReserveService reserveService) {
-        this.reserveService = reserveService;
-    }
-
-
 
     //예약기능 최대 30명까지, 예약인원 중복 안되게
     @PostMapping("{userId}/reserve/insert")
@@ -37,14 +33,14 @@ public class ReserveController {
 
         ReserveCommand update = reserveService.modifyReservation(userId);
 
-        update.setUserId(userId);
+        update.builder().userId(userId).build();
 
         return update;
     }
 
     //예약취소
     @GetMapping("/reserve/delete")
-    public String delete(int id){
+    public String delete(long id){
 
        reserveService.deleteReservation(id);
 

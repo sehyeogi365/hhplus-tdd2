@@ -1,12 +1,16 @@
-package hhdplus.hhplus_tdd2.interfaces.controller;
+package hhdplus.hhplus_tdd2.interfaces.dto;
 
 import java.util.Date;
 
-public class LectureRequest {
+public class LectureResponse {
 
     private int id;
     private String name;
+
     private String instructor;
+
+    private Date createdAt;
+    private Date updatedAt;
     private Date enrollment_start_date;
     private Date enrollment_end_date;
     private Date course_start_date;
@@ -34,6 +38,22 @@ public class LectureRequest {
 
     public void setInstructor(String instructor) {
         this.instructor = instructor;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Date getEnrollment_start_date() {

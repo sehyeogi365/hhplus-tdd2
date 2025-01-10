@@ -1,6 +1,6 @@
 package hhdplus.hhplus_tdd2.domain.reserve;
 
-import hhdplus.hhplus_tdd2.interfaces.controller.ReserveRequest;
+import hhdplus.hhplus_tdd2.interfaces.dto.ReserveRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class ReserveService {
 
     //예약내역 조회
     public List<ReserveInfo> findReservation(int userId){
-        return reserveRepository.findAll(userId);
+        return reserveRepository.findByUserId(userId);
     }
 
     //예약내역 1행 조회
