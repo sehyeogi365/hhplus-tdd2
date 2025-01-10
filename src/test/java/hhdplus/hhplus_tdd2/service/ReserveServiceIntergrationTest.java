@@ -4,28 +4,15 @@ import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveCommand;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveInfo;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveService;
-import hhdplus.hhplus_tdd2.infra.reserve.ReserveRepository;
+import hhdplus.hhplus_tdd2.domain.reserve.ReserveRepository;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)

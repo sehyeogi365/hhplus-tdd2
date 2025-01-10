@@ -4,25 +4,17 @@ import hhdplus.hhplus_tdd2.domain.reserve.Reserve;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveCommand;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveInfo;
 import hhdplus.hhplus_tdd2.domain.reserve.ReserveService;
-import hhdplus.hhplus_tdd2.infra.reserve.ReserveRepository;
+import hhdplus.hhplus_tdd2.domain.reserve.ReserveRepository;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -86,8 +78,6 @@ public class ReserveServiceTest {
         reserveResponse.setUserId(1);
         reserveResponse.setLectureId(1);
 
-
-
         ReserveRequest findOne = new ReserveRequest();
         findOne.setUserId(1);
         findOne.setLectureId(1);
@@ -104,7 +94,6 @@ public class ReserveServiceTest {
         }
         assertThat(findOne).isNotNull();
         assertThat(result.getLectureId()).isEqualTo(1);
-
     }
 
     @Test
@@ -158,8 +147,6 @@ public class ReserveServiceTest {
         assertThat(successCount).isEqualTo(30);//성공수
         //실패수
         assertThat(failCount).isEqualTo(10);//실패수
-
-
     }
 
     @Test

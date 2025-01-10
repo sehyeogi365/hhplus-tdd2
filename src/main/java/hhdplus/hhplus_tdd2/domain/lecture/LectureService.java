@@ -1,8 +1,8 @@
 package hhdplus.hhplus_tdd2.domain.lecture;
 
-import hhdplus.hhplus_tdd2.infra.lecture.LectureRepository;
 import hhdplus.hhplus_tdd2.interfaces.controller.LectureRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.LectureResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,13 +10,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class LectureService {
 
-    private LectureRepository lectureRepository;
-
-    public LectureService(LectureRepository lectureRepository) {
-        this.lectureRepository = lectureRepository;
-    }
+    private final LectureRepository lectureRepository;
 
     public LectureRequest insertLecture(LectureResponse lectureResponse){
 

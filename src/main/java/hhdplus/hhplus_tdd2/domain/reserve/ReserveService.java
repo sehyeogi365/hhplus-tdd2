@@ -1,8 +1,8 @@
 package hhdplus.hhplus_tdd2.domain.reserve;
 
-import hhdplus.hhplus_tdd2.infra.reserve.ReserveRepository;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,16 +10,12 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class ReserveService {
 
     private final ReserveRepository reserveRepository;
 
-    public ReserveService(ReserveRepository reserveRepository) {
-        this.reserveRepository = reserveRepository;
-    }
-
     //에약기능 최대 30명까지, 예약인원 중복 안되게
-    @Transactional
     public ReserveRequest insertReservation(ReserveResponse reserveResponse){
 
         int count = reserveRepository.count(reserveResponse.getLectureId());//예약인원
@@ -48,14 +44,13 @@ public class ReserveService {
     }
 
     //예약수정
-    @Transactional
     public ReserveCommand modifyReservation(int userId){
-        return reserveRepository.update(userId);
+        return reserveRepository.updateReserve(userId);
     }
 
     //예약취소
-    @Transactional
-    public void deleteReservation(int id){
+
+    public void deleteReservation(long id){
         reserveRepository.findById(id).ifPresent(reserve -> reserveRepository.delete(reserve));
     }
 

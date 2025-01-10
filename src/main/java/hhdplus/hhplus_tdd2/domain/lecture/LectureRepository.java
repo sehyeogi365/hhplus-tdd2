@@ -1,4 +1,4 @@
-package hhdplus.hhplus_tdd2.infra.lecture;
+package hhdplus.hhplus_tdd2.domain.lecture;
 
 import hhdplus.hhplus_tdd2.domain.lecture.Lecture;
 import hhdplus.hhplus_tdd2.interfaces.controller.LectureRequest;
