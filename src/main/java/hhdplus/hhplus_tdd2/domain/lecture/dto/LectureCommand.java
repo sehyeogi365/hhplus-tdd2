@@ -1,4 +1,4 @@
-package hhdplus.hhplus_tdd2.domain.lecture;
+package hhdplus.hhplus_tdd2.domain.lecture.dto;
 
 import lombok.Builder;
 import lombok.Getter;

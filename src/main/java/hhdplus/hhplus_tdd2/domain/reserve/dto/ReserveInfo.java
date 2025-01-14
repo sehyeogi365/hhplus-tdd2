@@ -1,4 +1,4 @@
-package hhdplus.hhplus_tdd2.domain.lecture;
+package hhdplus.hhplus_tdd2.domain.reserve.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,9 +7,11 @@ import java.util.Date;
 
 @Getter
 @Builder
-public class LectureInfo {//강의 카드 한장에 들어가는 정보
-
+public class ReserveInfo {
+    //예약 카드 한장에 들어갈 정보
     private int id;
+    private int userId;
+    private int lectureId;
     private String name;
     private String instructor;
     private Date enrollment_start_date;

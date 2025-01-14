@@ -1,8 +1,8 @@
 package hhdplus.hhplus_tdd2.interfaces.controller;
 
-import hhdplus.hhplus_tdd2.domain.reserve.ReserveCommand;
-import hhdplus.hhplus_tdd2.domain.reserve.ReserveInfo;
-import hhdplus.hhplus_tdd2.domain.reserve.ReserveService;
+import hhdplus.hhplus_tdd2.domain.reserve.dto.ReserveCommand;
+import hhdplus.hhplus_tdd2.domain.reserve.dto.ReserveInfo;
+import hhdplus.hhplus_tdd2.domain.reserve.service.ReserveService;
 import hhdplus.hhplus_tdd2.interfaces.dto.ReserveRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

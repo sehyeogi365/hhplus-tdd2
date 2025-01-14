@@ -1,4 +1,4 @@
-package hhdplus.hhplus_tdd2.domain.reserve;
+package hhdplus.hhplus_tdd2.domain.reserve.dto;
 
 import lombok.Builder;
 import lombok.Getter;

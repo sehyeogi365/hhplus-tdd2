@@ -1,7 +1,7 @@
 package hhdplus.hhplus_tdd2.interfaces.controller;
 
-import hhdplus.hhplus_tdd2.domain.lecture.Lecture;
-import hhdplus.hhplus_tdd2.domain.lecture.LectureService;
+import hhdplus.hhplus_tdd2.domain.lecture.entity.Lecture;
+import hhdplus.hhplus_tdd2.domain.lecture.service.LectureService;
 import hhdplus.hhplus_tdd2.interfaces.dto.LectureRequest;
 import hhdplus.hhplus_tdd2.interfaces.dto.LectureResponse;
 import org.springframework.web.bind.annotation.GetMapping;

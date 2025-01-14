@@ -1,7 +1,9 @@
 package hhdplus.hhplus_tdd2.service;
 
-import hhdplus.hhplus_tdd2.domain.reserve.*;
-
+import hhdplus.hhplus_tdd2.domain.reserve.dto.ReserveCommand;
+import hhdplus.hhplus_tdd2.domain.reserve.dto.ReserveInfo;
+import hhdplus.hhplus_tdd2.domain.reserve.repository.ReserveRepository;
+import hhdplus.hhplus_tdd2.domain.reserve.service.ReserveService;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
 import hhdplus.hhplus_tdd2.interfaces.dto.ReserveRequest;
 import org.junit.jupiter.api.Test;

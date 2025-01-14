@@ -1,5 +1,8 @@
-package hhdplus.hhplus_tdd2.domain.reserve;
+package hhdplus.hhplus_tdd2.domain.reserve.repository;
 
+import hhdplus.hhplus_tdd2.domain.reserve.dto.ReserveInfo;
+import hhdplus.hhplus_tdd2.domain.reserve.dto.ReserveCommand;
+import hhdplus.hhplus_tdd2.domain.reserve.entity.Reserve;
 import hhdplus.hhplus_tdd2.interfaces.dto.ReserveRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,5 +1,8 @@
-package hhdplus.hhplus_tdd2.domain.reserve;
+package hhdplus.hhplus_tdd2.domain.reserve.service;
 
+import hhdplus.hhplus_tdd2.domain.reserve.dto.ReserveCommand;
+import hhdplus.hhplus_tdd2.domain.reserve.dto.ReserveInfo;
+import hhdplus.hhplus_tdd2.domain.reserve.repository.ReserveRepository;
 import hhdplus.hhplus_tdd2.interfaces.dto.ReserveRequest;
 import hhdplus.hhplus_tdd2.interfaces.controller.ReserveResponse;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +52,6 @@ public class ReserveService {
     }
 
     //예약취소
-
     public void deleteReservation(long id){
         reserveRepository.findById(id).ifPresent(reserve -> reserveRepository.delete(reserve));
     }
