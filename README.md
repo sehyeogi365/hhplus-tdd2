@@ -10,3 +10,4 @@ reservation_history 테이블 : id(pk), 사용자아이디(fk1, userId), 강의�
 
 우선 reservation 테이블에는 예약한 사용자의 정보와 강의의 정보를 받아와야 했습니다. 유저테이블의 id인 userId를 fk1, 강의테이블의 id 인 lectureId를 fk2로 받았습니다.
 reservation_history 테이블은 예약한 사용자의 정보와 강의의 정보를 받아오고 강의 명과 강의 예약 상태정보를 담습니다.
+이력 테이블에는 실패이력까지 저장되며 강의 정보를 함께 저장합니다.
