@@ -1,4 +1,5 @@
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkS10i%2FbtsLzXQlsak%2FcAve228KnwRTeaC1LmvRm1%2Fimg.png"/>
+
+![image](https://github.com/user-attachments/assets/d3357746-c912-4d55-b3b7-db778086b5a8)
 
 사용자의 정보 데이터를 담는 user 테이블, 강의 정보 데이터를 담는 lecture 테이블, 그리고 사용자가 예약한 강의 정보를 담는 reservation 테이블 총 3개의 테이블로 구성하기로 했습니다.
 
